@@ -26,7 +26,7 @@ namespace calculator
         {
             InitializeComponent();
         }
-
+        
 
         /// <summary>
         /// 
@@ -147,8 +147,8 @@ namespace calculator
                     Output = float.Parse(InputField[0]) + Input1;
                     break;
             }
-
-            OutputDropDown.Items.Insert(0, Output.ToString());
+            string Equation = InputField[0] + " " + Operator + " " + InputField[1] + " = " + Output.ToString();
+            OutputDropDown.Items.Insert(0, Equation);
             OutputDropDown.SelectedIndex = 0;
         }
         /// <summary>
@@ -241,9 +241,37 @@ namespace calculator
             updateInputFields();
         }
 
+
+        /// <summary>
+        /// 
+        /// If one of the input input fields changed
+        /// update the input field variable (string InputField)
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void inputFieldTextChanged(object sender, EventArgs e)
+        {
+            TextBox Input = (TextBox)sender;
+            int Field = 0;
+            switch (Input.Name)
+            {
+                case "InputField0":
+                    Field = 0;
+                    break;
+                case "InputField1":
+                    Field = 1;
+                    break;
+                
+            }
+            InputField[Field] = Input.Text;
+            updateInputFields();
+        }
+
         private void ProcentBox_CheckedChanged(object sender, EventArgs e)
         {
 
         }
+
     }
 }
